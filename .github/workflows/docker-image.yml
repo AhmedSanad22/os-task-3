@@ -14,13 +14,13 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Debugging secrets
-      run: echo username ${{DOCKERHUB_USERNAME}} password ${{ DOCKERHUB_ACCESS_TOKEN }}
+      run: echo username ${{ secrets.DOCKERHUB_USERNAME }} password ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
     
     - name: Login to Docker hub
-      run: docker login --username ${{ DOCKERHUB_USERNAME }} --password ${{ DOCKERHUB_ACCESS_TOKEN }}
+      run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
       
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ DOCKERHUB_USERNAME }}/ahmed-image
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/ahmed-image
       
     - name: Push the Docker image to Docker hub
-      run: docker push ${{ DOCKERHUB_USERNAME }}/ahmed-image
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ahmed-image
